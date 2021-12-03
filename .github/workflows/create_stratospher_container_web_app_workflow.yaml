@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
+      JDA_REGISTRY: https://jdasoftware.jfrog.io/jdasoftware/api/npm/npm/
       GITHUB_REPO_NAME: "${{ github.event.client_payload.strato.repo }}"
       # AZURE_SUBSCRIPTION: ${{ secrets.STRATO_AZURE_SUBSCRIPTION }}
       AZURE_DEPLOY_ENVIRONMENT: "${{ github.event.client_payload.environment }}"
@@ -69,7 +70,10 @@ jobs:
             
     - name: Build Docker Image
       run: |
-        sudo docker build . --file ".github/docker/Dockerfile_$AZURE_CONTAINER_WEB_APP_TYPE" --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG"
+        #sudo docker build . --file ".github/docker/Dockerfile_$AZURE_CONTAINER_WEB_APP_TYPE" --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG"
+        sudo docker build . --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG" \
+        --build-arg JDA_REGISTRY=${{ env.JDA_REGISTRY }} \
+        --build-arg ARTIFACTORY_AUTH=${{secrets.ARTIFACTORY_AUTH}}
         
     - name: Tag Docker Image
       run: |
