@@ -1,0 +1,36 @@
+FROM node:10-alpine as build
+ARG ARTIFACTORY_AUTH=abcde
+ARG JDA_REGISTRY=abcde
+WORKDIR /app
+
+ARG REACT_APP_POLICY_NAME=abcde
+ARG REACT_APP_TENANT_HOST=abcde
+ARG REACT_APP_B2C_DOMAIN_HOST=abcde
+ARG REACT_APP_SCOPE=abcde
+ARG REACT_APP_CLIENT_ID=abcde
+ARG REACT_APP_APIM_HOST=abcde
+ARG REACT_APP_APIM_ROUTE=abcde
+
+ENV REACT_APP_POLICY_NAME=$REACT_APP_POLICY_NAME
+ENV REACT_APP_TENANT_HOST=$REACT_APP_TENANT_HOST
+ENV REACT_APP_B2C_DOMAIN_HOST=$REACT_APP_B2C_DOMAIN_HOST
+ENV REACT_APP_SCOPE=$REACT_APP_SCOPE
+ENV REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID
+ENV REACT_APP_APIM_HOST=$REACT_APP_APIM_HOST
+ENV REACT_APP_APIM_ROUTE=$REACT_APP_APIM_ROUTE
+
+ENV NO_UPDATE_NOTIFIER true
+COPY package*.json ./
+RUN npm config set _auth=${ARTIFACTORY_AUTH}
+RUN npm config set always-auth
+RUN npm config set registry ${JDA_REGISTRY}
+RUN npm config set @jda:registry ${JDA_REGISTRY}
+RUN npm config set email no-reply@jda.com
+RUN npm install
+COPY . ./
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

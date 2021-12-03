@@ -1,0 +1,98 @@
+[
+  {
+    "dev": [
+      {
+        "name": "2020.1.0.0",
+        "workflows": [
+          {
+            "id": "5ed00a12-f0b5-413b-ac65-043fff561b10",
+            "createdBy": "Super User",
+            "createdAt": "2021-08-18T07:50:56.359Z",
+            "updatedBy": null,
+            "updatedAt": "2021-08-18T07:50:56.359Z",
+            "name": "Approval",
+            "description": "Creating Template",
+            "triggerType": "manual",
+            "logicAppApiVersion": "2016-06-01",
+            "githubURI": "https://github.com/Ramesh1589/workflow_test/blob/main/approval.json",
+            "sha": "ab4b3dd5f2dc5c21c67f7a9a9c6f4ad36b3fa0fb",
+            "state": "enabled",
+            "applicationId": "051d4705-ad8e-4285-84bd-9a47f94d033b"
+          },
+          {
+            "id": "74064ddf-be10-41de-9e72-4f85a8c50a62",
+            "createdBy": "Super User",
+            "createdAt": "2021-08-18T08:05:19.346Z",
+            "updatedBy": null,
+            "updatedAt": "2021-08-18T08:07:21.893Z",
+            "name": "Approval 2",
+            "description": "Creating Template",
+            "triggerType": "manual",
+            "logicAppApiVersion": "2016-06-01",
+            "githubURI": "https://github.com/Ramesh1589/workflow_test/blob/main/approval_2.json",
+            "sha": "ab4b3dd5f2dc5c21c67f7a9a9c6f4ad36b3fa0fb",
+            "state": "enabled",
+            "applicationId": "051d4705-ad8e-4285-84bd-9a47f94d033b"
+          },
+          {
+            "id": "27473e2a-c4ab-4b7a-a823-71cdbd1d9f44",
+            "createdBy": "Super User",
+            "createdAt": "2021-08-19T10:55:29.113Z",
+            "updatedBy": null,
+            "updatedAt": "2021-08-19T10:56:04.749Z",
+            "name": "new email",
+            "description": null,
+            "triggerType": "manual",
+            "logicAppApiVersion": "2016-06-01",
+            "githubURI": "https://github.com/Ramesh1589/workflow_test/blob/main/new_email.json",
+            "sha": "bc71823e5dc99a507b0afc5df2379cbbbd4190f0",
+            "state": "enabled",
+            "applicationId": "051d4705-ad8e-4285-84bd-9a47f94d033b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "prod": [
+      {
+        "name": "2021.1.0.0",
+        "workflows": [
+          {
+            "id": "5ed00a12-f0b5-413b-ac65-043fff561b10",
+            "createdBy": "Super User",
+            "createdAt": "2021-08-18T07:50:56.359Z",
+            "updatedBy": null,
+            "updatedAt": "2021-08-18T07:50:56.359Z",
+            "name": "Approval",
+            "description": "Creating Template",
+            "triggerType": "manual",
+            "logicAppApiVersion": "2016-06-01",
+            "githubURI": "https://github.com/Ramesh1589/workflow_test/blob/main/approval.json",
+            "sha": "ab4b3dd5f2dc5c21c67f7a9a9c6f4ad36b3fa0fb",
+            "state": "enabled",
+            "applicationId": "051d4705-ad8e-4285-84bd-9a47f94d033b"
+          },
+          {
+            "id": "74064ddf-be10-41de-9e72-4f85a8c50a62",
+            "createdBy": "Super User",
+            "createdAt": "2021-08-18T08:05:19.346Z",
+            "updatedBy": null,
+            "updatedAt": "2021-08-18T08:07:21.893Z",
+            "name": "Approval 2",
+            "description": "Creating Template",
+            "triggerType": "manual",
+            "logicAppApiVersion": "2016-06-01",
+            "githubURI": "https://github.com/Ramesh1589/workflow_test/blob/main/approval_2.json",
+            "sha": "ab4b3dd5f2dc5c21c67f7a9a9c6f4ad36b3fa0fb",
+            "state": "enabled",
+            "applicationId": "051d4705-ad8e-4285-84bd-9a47f94d033b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "qa": []
+  }
+]
