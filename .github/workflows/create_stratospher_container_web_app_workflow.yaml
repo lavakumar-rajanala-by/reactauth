@@ -102,23 +102,23 @@ jobs:
           AZURE_CONTAINER_WEB_STATUS=`cat temp.json | jq -r '.status.state'`
         done 
         
-    - name: Update Stratospher Container Web Endpoints File
-      run: |
-        rm temp.json
-        if [ ! -f .github/contaierweb/contaierweb.json ];then
-          mkdir -p .github/contaierweb
-          touch .github/contaierweb/contaierweb.json
-          echo "{}" > .github/contaierweb/contaierweb.json
-        fi
-        jq --arg container_web_name $AZURE_CONTAINER_WEB_APP_NAME --arg project_name $PROJECT_NAME --arg webapp_url $CONTAINER_WEB_ENDPOINT_URL '. + {($container_web_name): {"project_name": $project_name, "webapp_url": $webapp_url}}' < .github/contaierweb/contaierweb.json > tmp_contaierweb.json && mv tmp_contaierweb.json .github/contaierweb/contaierweb.json
-        git config --global user.email "siva.medapati@blueyonder.com"
-        git config --global user.name "Siva Medapati"
-        git config pull.rebase false
-        git pull origin ${BRANCH}
-        git add -f .github/contaierweb/contaierweb.json
-        if [ -z "$(git status --porcelain)" ]; then 
-          echo "Nothing to commit"
-        else 
-          git commit -m "update webapp endpoint"
-          git push origin ${BRANCH}
-        fi
+    # - name: Update Stratospher Container Web Endpoints File
+    #   run: |
+    #     rm temp.json
+    #     if [ ! -f .github/contaierweb/contaierweb.json ];then
+    #       mkdir -p .github/contaierweb
+    #       touch .github/contaierweb/contaierweb.json
+    #       echo "{}" > .github/contaierweb/contaierweb.json
+    #     fi
+    #     jq --arg container_web_name $AZURE_CONTAINER_WEB_APP_NAME --arg project_name $PROJECT_NAME --arg webapp_url $CONTAINER_WEB_ENDPOINT_URL '. + {($container_web_name): {"project_name": $project_name, "webapp_url": $webapp_url}}' < .github/contaierweb/contaierweb.json > tmp_contaierweb.json && mv tmp_contaierweb.json .github/contaierweb/contaierweb.json
+    #     git config --global user.email "siva.medapati@blueyonder.com"
+    #     git config --global user.name "Siva Medapati"
+    #     git config pull.rebase false
+    #     git pull origin ${BRANCH}
+    #     git add -f .github/contaierweb/contaierweb.json
+    #     if [ -z "$(git status --porcelain)" ]; then 
+    #       echo "Nothing to commit"
+    #     else 
+    #       git commit -m "update webapp endpoint"
+    #       git push origin ${BRANCH}
+    #     fi
