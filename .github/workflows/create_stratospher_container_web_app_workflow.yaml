@@ -26,7 +26,7 @@ jobs:
     steps:
     - name: Set env
       run: |
-        echo "AZURE_WEB_APP_SVC_PLAN=${AZURE_CONTAINER_WEB_APP_NAME}" >> $GITHUB_ENV
+        # echo "AZURE_WEB_APP_SVC_PLAN=${AZURE_CONTAINER_WEB_APP_NAME}" >> $GITHUB_ENV
         # echo "AZURE_ACR_NAME=${AZURE_ACR_NAME_PREFIX}" >> $GITHUB_ENV
         echo "AZURE_CONTAINER_WEB_APP_IMAGE_NAME=${AZURE_CONTAINER_WEB_APP_NAME}" >> $GITHUB_ENV
     
