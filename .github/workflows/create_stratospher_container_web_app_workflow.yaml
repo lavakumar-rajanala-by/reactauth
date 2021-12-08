@@ -90,11 +90,11 @@ jobs:
     - name: Create Stratosphere Container Web
       run: |
         curl -H "accept: application/json" \
-        -H "Content-Type: application/json" \ 
-        -H "Authorization: Bearer ${{ env.STRATOSPHERE_ACCESS_TOKEN }}" \ 
-        --request PUT \ 
-        --data '{"spec": {"liveness_probe": {"initial_delay_seconds": 180,"path": "/"},"enabled": true,"image": '\"${{ env.AZURE_ACR_RESOURCE_NAME }}.azurecr.io/${{ env.AZURE_CONTAINER_WEB_APP_IMAGE_NAME }}:${{ env.AZURE_WEB_APP_IMAGE_TAG }}\"',"network": {"access": "external"},"authentication": {"enabled": true}}}' \ 
-        ${{ env.STRATOSPHERE_API_URL }}/geographies/${{ env.GEOGRAPHY }}/projects/alm/resources/container-web/${{ env.AZURE_CONTAINER_WEB_APP_NAME }}
+          -H "Content-Type: application/json" \ 
+          -H "Authorization: Bearer ${{ env.STRATOSPHERE_ACCESS_TOKEN }}" \ 
+          --request PUT \ 
+          --data '{"spec": {"liveness_probe": {"initial_delay_seconds": 180,"path": "/"},"enabled": true,"image": '\"${{ env.AZURE_ACR_RESOURCE_NAME }}.azurecr.io/${{ env.AZURE_CONTAINER_WEB_APP_IMAGE_NAME }}:${{ env.AZURE_WEB_APP_IMAGE_TAG }}\"',"network": {"access": "external"},"authentication": {"enabled": true}}}' \ 
+          ${{ env.STRATOSPHERE_API_URL }}/geographies/${{ env.GEOGRAPHY }}/projects/alm/resources/container-web/${{ env.AZURE_CONTAINER_WEB_APP_NAME }}
     
     # - name: Update Stratospher Container Web Endpoints File
     #   run: |
