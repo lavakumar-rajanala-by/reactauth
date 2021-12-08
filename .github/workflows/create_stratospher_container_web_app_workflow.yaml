@@ -19,7 +19,7 @@ jobs:
       AZURE_ACR_NAME: 'almacr'
       AZURE_ACR_RESOURCE_NAME: 'ooo55fn7bu5d3fc0fwrszk99'
       STRATOSPHERE_API_URL: https://api.live.external.byp.ai
-      PROJECT_NAME: "${{ github.event.client_payload.project_name }}"
+      # PROJECT_NAME: "${{ github.event.client_payload.project_name }}"
       GEOGRAPHY: "${{ github.event.client_payload.geography }}"
       STRATOSPHERE_ACCESS_TOKEN: "${{ github.event.client_payload.strato.stratospher_access_token }}"
       AZURE_CONTAINER_WEB_APP_NAME: "${{ github.event.client_payload.strato.container_web_app_name }}"
@@ -94,8 +94,18 @@ jobs:
         -H "Authorization: Bearer ${{ env.STRATOSPHERE_ACCESS_TOKEN }}" \ 
         --request PUT \ 
         --data '{"spec": {"liveness_probe": {"initial_delay_seconds": 180,"path": "/"},"enabled": true,"image": '\"${{ env.AZURE_ACR_RESOURCE_NAME }}.azurecr.io/${{ env.AZURE_CONTAINER_WEB_APP_IMAGE_NAME }}:${{ env.AZURE_WEB_APP_IMAGE_TAG }}\"',"network": {"access": "external"},"authentication": {"enabled": true}}}' \ 
-        ${{ env.STRATOSPHERE_API_URL }}/geographies/${{ env.GEOGRAPHY }}/projects/${{ env.PROJECT_NAME }}/resources/container-web/${{ env.AZURE_CONTAINER_WEB_APP_NAME }} 
-        
+        ${{ env.STRATOSPHERE_API_URL }}/geographies/${{ env.GEOGRAPHY }}/projects/alm/resources/container-web/${{ env.AZURE_CONTAINER_WEB_APP_NAME }} > temp.json
+        echo "CONTAINER_WEB_ENDPOINT_URL=$(jq -r '.links.endpoint.url' temp.json)" >> $GITHUB_ENV
+        AZURE_CONTAINER_WEB_STATUS=`cat temp.json | jq -r '.status.state'`
+        while [ "$AZURE_CONTAINER_WEB_STATUS" != 'deployed' ]
+        do
+        curl -H "accept: application/json" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ env.STRATOSPHERE_ACCESS_TOKEN }}" \
+          --request GET \
+          ${{ env.STRATOSPHERE_API_URL }}/geographies/${{ env.GEOGRAPHY }}/projects/${{ env.PROJECT_NAME }}/resources/container-web/${{ env.AZURE_CONTAINER_WEB_APP_NAME }} > temp.json
+          AZURE_CONTAINER_WEB_STATUS=`cat temp.json | jq -r '.status.state'`
+        done 
     # - name: Update Stratospher Container Web Endpoints File
     #   run: |
     #     rm temp.json
