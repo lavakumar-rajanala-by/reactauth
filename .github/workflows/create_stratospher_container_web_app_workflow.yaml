@@ -103,7 +103,7 @@ jobs:
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer ${{ env.STRATOSPHERE_ACCESS_TOKEN }}" \
           --request GET \
-          ${{ env.STRATOSPHERE_API_URL }}/geographies/${{ env.GEOGRAPHY }}/projects/${{ env.PROJECT_NAME }}/resources/container-web/${{ env.AZURE_CONTAINER_WEB_APP_NAME }} > temp.json
+          ${{ env.STRATOSPHERE_API_URL }}/geographies/${{ env.GEOGRAPHY }}/projects/alm/resources/container-web/${{ env.AZURE_CONTAINER_WEB_APP_NAME }} > temp.json
           AZURE_CONTAINER_WEB_STATUS=`cat temp.json | jq -r '.status.state'`
         done 
     # - name: Update Stratospher Container Web Endpoints File
