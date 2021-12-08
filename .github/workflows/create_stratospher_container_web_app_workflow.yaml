@@ -10,12 +10,12 @@ jobs:
       JDA_REGISTRY: https://jdasoftware.jfrog.io/jdasoftware/api/npm/npm/
       GITHUB_REPO_NAME: "${{ github.event.client_payload.strato.repo }}"
       # AZURE_SUBSCRIPTION: ${{ secrets.STRATO_AZURE_SUBSCRIPTION }}
-      AZURE_DEPLOY_ENVIRONMENT: "${{ github.event.client_payload.environment }}"
+      # AZURE_DEPLOY_ENVIRONMENT: "${{ github.event.client_payload.environment }}"
       AZURE_CONTAINER_WEB_APP_TYPE: "${{ github.event.client_payload.app_type }}"
       # AZURE_CLIENT_ID: ${{ secrets.STRATO_AZURE_CLIENT_ID }}
       # AZURE_CLIENT_SECRET: ${{ secrets.STRATO_AZURE_CLIENT_SECRET }}
       AZURE_TENANT_ID: "${{ github.event.client_payload.tenant_id }}"
-      AZURE_CONTAINER_WEB_APP_NAME_PREFIX: 'alm-app'
+      # AZURE_CONTAINER_WEB_APP_NAME_PREFIX: 'alm-app'
       AZURE_ACR_NAME: 'almacr'
       AZURE_ACR_RESOURCE_NAME: 'ooo55fn7bu5d3fc0fwrszk99'
       STRATOSPHERE_API_URL: https://api.live.external.byp.ai
@@ -26,9 +26,9 @@ jobs:
     steps:
     - name: Set env
       run: |
-        echo "AZURE_WEB_APP_SVC_PLAN=${AZURE_CONTAINER_WEB_APP_NAME_PREFIX}-${AZURE_CONTAINER_WEB_APP_TYPE}-${AZURE_DEPLOY_ENVIRONMENT}" >> $GITHUB_ENV
+        echo "AZURE_WEB_APP_SVC_PLAN=${AZURE_CONTAINER_WEB_APP_NAME}" >> $GITHUB_ENV
         # echo "AZURE_ACR_NAME=${AZURE_ACR_NAME_PREFIX}" >> $GITHUB_ENV
-        echo "AZURE_CONTAINER_WEB_APP_IMAGE_NAME=${GITHUB_REPO_NAME}-${AZURE_DEPLOY_ENVIRONMENT}" >> $GITHUB_ENV
+        echo "AZURE_CONTAINER_WEB_APP_IMAGE_NAME=${AZURE_CONTAINER_WEB_APP_NAME}" >> $GITHUB_ENV
     
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -71,7 +71,8 @@ jobs:
     - name: Build Docker Image
       run: |
         #sudo docker build . --file ".github/docker/Dockerfile_$AZURE_CONTAINER_WEB_APP_TYPE" --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG"
-        sudo docker build . --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG" \
+        #sudo docker build . --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG" \
+        sudo docker build . --file ".github/docker/Dockerfile_$AZURE_CONTAINER_WEB_APP_TYPE" --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG" \
         --build-arg JDA_REGISTRY=${{ env.JDA_REGISTRY }} \
         --build-arg ARTIFACTORY_AUTH=${{secrets.ARTIFACTORY_AUTH}}
         
