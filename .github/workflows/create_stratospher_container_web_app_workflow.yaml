@@ -30,8 +30,8 @@ jobs:
 
     - name: Login to Azure
       run: |
-        echo "::add-mask::$ALM_SPN_USERNAME"
-        echo "::add-mask::$ALM_SPN_PASSWORD"
+        echo "::add-mask::${{ env.ALM_SPN_USERNAME }}"
+        echo "::add-mask::${{ env.ALM_SPN_PASSWORD }}"
         az login \
           --service-principal \
           --username "${{ env.ALM_SPN_USERNAME }}" \
