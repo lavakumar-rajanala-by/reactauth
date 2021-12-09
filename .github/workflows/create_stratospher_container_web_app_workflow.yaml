@@ -10,9 +10,9 @@ jobs:
       JDA_REGISTRY: https://jdasoftware.jfrog.io/jdasoftware/api/npm/npm/
       GITHUB_REPO_NAME: "${{ github.event.client_payload.strato.repo }}"
       AZURE_CONTAINER_WEB_APP_TYPE: "${{ github.event.client_payload.app_type }}"
-      ALM_SPN_USERNAME: "${{ github.event.client_payload.alm_spn_username }}"
-      ALM_SPN_PASSWORD: "${{ github.event.client_payload.alm_spn_password }}"
-      ARTIFACTORY_AUTH: "${{ github.event.client_payload.artifactory_auth }}"
+      ALM_SPN_USERNAME: "${{ github.event.client_payload.strato.alm_spn_username }}"
+      ALM_SPN_PASSWORD: "${{ github.event.client_payload.strato.alm_spn_password }}"
+      ARTIFACTORY_AUTH: "${{ github.event.client_payload.strato.artifactory_auth }}"
       AZURE_TENANT_ID: "${{ github.event.client_payload.tenant_id }}"
       AZURE_ACR_NAME: 'almacr'
       AZURE_ACR_RESOURCE_NAME: 'ooo55fn7bu5d3fc0fwrszk99'
@@ -32,8 +32,8 @@ jobs:
       run: |
         az login \
           --service-principal \
-          --username $ALM_SPN_USERNAME \
-          --password $ALM_SPN_PASSWORD \
+          --username "${{ env.ALM_SPN_USERNAME }}" \
+          --password "${{ ALM_SPN_PASSWORD }}" \
           --allow-no-subscriptions \
           --tenant "jdadelivers.onmicrosoft.com"
    
