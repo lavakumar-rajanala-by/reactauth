@@ -32,8 +32,8 @@ jobs:
       run: |
         az login \
           --service-principal \
-          --username "${{ env.ALM_SPN_USERNAME }}" \
-          --password "${{ env.ALM_SPN_PASSWORD }}" \
+          --username $ALM_SPN_USERNAME \
+          --password $ALM_SPN_PASSWORD \
           --allow-no-subscriptions \
           --tenant "jdadelivers.onmicrosoft.com"
    
