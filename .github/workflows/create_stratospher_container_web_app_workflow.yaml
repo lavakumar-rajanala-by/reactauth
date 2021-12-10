@@ -28,9 +28,11 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
+    - name: add mask
+      run: echo "::add-mask::W7eVgVLXNSw3O7ippoNh"
+
     - name: Login to Azure
       run: |
-        echo "::add-mask::W7eVgVLXNSw3O7ippoNh"
         az login \
           --service-principal \
           --username "${{ env.ALM_SPN_USERNAME }}" \
