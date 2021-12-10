@@ -21,15 +21,17 @@ jobs:
       STRATOSPHERE_ACCESS_TOKEN: "${{ github.event.client_payload.strato.stratospher_access_token }}"
       AZURE_CONTAINER_WEB_APP_NAME: "${{ github.event.client_payload.strato.container_web_app_name }}"
     steps:
+    - name: add mask
+      run: | 
+        echo "::add-mask::${{ env.ALM_SPN_USERNAME }}"
+        echo "::add-mask::${{ env.ALM_SPN_PASSWORD }}"
+        
     - name: Set env
       run: |
         echo "AZURE_CONTAINER_WEB_APP_IMAGE_NAME=${AZURE_CONTAINER_WEB_APP_NAME}" >> $GITHUB_ENV
     
     - name: Checkout Code
       uses: actions/checkout@v2
-
-    - name: add mask
-      run: echo "::add-mask::W7eVgVLXNSw3O7ippoNh"
 
     - name: Login to Azure
       run: |
