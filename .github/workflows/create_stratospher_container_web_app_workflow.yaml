@@ -70,7 +70,7 @@ jobs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
         platform: | 
-          linux/arm64
+          --platform linux/ppc64le
         build-arg: | 
           JDA_REGISTRY: ${{ env.JDA_REGISTRY }}, 
           ARTIFACTORY_AUTH: ${{ env.ARTIFACTORY_AUTH }}
