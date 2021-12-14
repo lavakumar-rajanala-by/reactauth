@@ -20,7 +20,7 @@ RUN npm config set registry ${JDA_REGISTRY}
 RUN npm config set @jda:registry ${JDA_REGISTRY}
 RUN npm config set email no-reply@jda.com
 
-RUN npm install --force
+RUN npm install
 RUN npm run build
 
 # production environment
