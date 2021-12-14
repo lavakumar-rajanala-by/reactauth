@@ -1,8 +1,5 @@
 FROM node:14.16-alpine AS build
 
-RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
-RUN sudo apt install nodejs
-
 ARG ARTIFACTORY_AUTH=abcde
 ARG JDA_REGISTRY=abcde
 
