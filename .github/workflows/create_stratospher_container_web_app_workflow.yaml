@@ -69,6 +69,9 @@ jobs:
         tags: ${{ env.AZURE_ACR_RESOURCE_NAME }}.azurecr.io/${{ env.AZURE_CONTAINER_WEB_APP_IMAGE_NAME }}:${{ env.AZURE_WEB_APP_IMAGE_TAG }}
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
+        build-arg: | 
+          JDA_REGISTRY: ${{ env.JDA_REGISTRY }}, 
+          ARTIFACTORY_AUTH: ${{ env.ARTIFACTORY_AUTH }}
     # - name: Build Docker Image
     #   run: |
     #     sudo docker build . --file ".github/docker/Dockerfile_$AZURE_CONTAINER_WEB_APP_TYPE" \
