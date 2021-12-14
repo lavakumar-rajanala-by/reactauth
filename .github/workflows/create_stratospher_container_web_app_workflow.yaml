@@ -83,8 +83,6 @@ jobs:
         sudo docker buildx build . --file ".github/docker/Dockerfile_$AZURE_CONTAINER_WEB_APP_TYPE" \
         --cache-from type=local,src=/tmp/.buildx-cache \
         --cache-to type=local,dest=/tmp/.buildx-cache-new \
-        --cache: "enabled" \
-        --build-arg BUILDKIT_INLINE_CACHE=1 \
         --tag "$AZURE_ACR_RESOURCE_NAME.azurecr.io/$AZURE_CONTAINER_WEB_APP_IMAGE_NAME:$AZURE_WEB_APP_IMAGE_TAG" \
         --build-arg JDA_REGISTRY=${{ env.JDA_REGISTRY }} \
         --build-arg ARTIFACTORY_AUTH=${{ env.ARTIFACTORY_AUTH }}
