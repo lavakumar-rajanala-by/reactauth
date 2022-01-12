@@ -1,8 +1,8 @@
 
 FROM node:14.16-alpine AS build
 
-ARG ARTIFACTORY_AUTH=abcde
-ARG JDA_REGISTRY=abcde
+ARG ARTIFACTORY_AUTH=test1
+ARG JDA_REGISTRY=test2
 
 WORKDIR /app
 COPY . /app/ 
